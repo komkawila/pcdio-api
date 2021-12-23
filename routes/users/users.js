@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../util/db.config');
+const db = require('../../util/db.config');
 const route = express.Router();
 
 // Get USER Type All

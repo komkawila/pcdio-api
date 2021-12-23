@@ -9,7 +9,8 @@ const env = {
       min: 0,
       acquire: 30000,
       idle: 10000
-    }
+    },
+    port : 3007
   };
   
   module.exports = env;

@@ -1,9 +1,11 @@
 const express = require('express');
-const db = require('../util/db.config');
+const db = require('../../util/db.config');
+// const db = require('../util/db.config');
 const route = express.Router();
 
+// ############################## AIR TYPE ##############################
 // Get Air Type All
-route.get('/type', async (req, res, next) => {
+route.get('/', async (req, res, next) => {
     console.log("GET Air Type")
     await db.query("SELECT * FROM airtype_db", function (err, result, fields) {
         if (err) {
@@ -17,7 +19,7 @@ route.get('/type', async (req, res, next) => {
 });
 
 // Get BY ID Air Type All
-route.get('/type/:airtype_id', async (req, res, next) => {
+route.get('/:airtype_id', async (req, res, next) => {
     const airtype_id = req.params.airtype_id;
     console.log("GET BY ID Air Type")
     await db.query("SELECT * FROM airtype_db WHERE airtype_id = ?", [airtype_id], function (err, result, fields) {
@@ -32,7 +34,7 @@ route.get('/type/:airtype_id', async (req, res, next) => {
 });
 
 // POST Air Type All
-route.post('/type', async (req, res, next) => {
+route.post('/', async (req, res, next) => {
     console.log("POST Air Type");
     const airtype_name = req.body.airtype_name;
     await db.query("INSERT INTO airtype_db (airtype_name) VALUES (?)", [airtype_name], function (err, result, fields) {
@@ -47,7 +49,7 @@ route.post('/type', async (req, res, next) => {
 });
 
 // POST Air Type All
-route.delete('/type/:airtype_id', async (req, res, next) => {
+route.delete('/:airtype_id', async (req, res, next) => {
     console.log("DELETE Air Type");
     const airtype_id = req.params.airtype_id;
     await db.query("DELETE FROM airtype_db WHERE airtype_id = ?", [airtype_id], function (err, result, fields) {
@@ -62,8 +64,8 @@ route.delete('/type/:airtype_id', async (req, res, next) => {
 });
 
 
-// POST Air Type All
-route.put('/type', async (req, res, next) => {
+// PUT Air Type All
+route.put('/', async (req, res, next) => {
     console.log("PUT Air Type");
     const airtype_id = req.body.airtype_id;
     const airtype_name = req.body.airtype_name;
@@ -77,4 +79,5 @@ route.put('/type', async (req, res, next) => {
         }
     });
 });
+
 module.exports = route;

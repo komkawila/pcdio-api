@@ -12,12 +12,6 @@ app.use(
 app.use(cors());
 app.use(express.json());
 
-app.use(function errorHandler (err, req, res, next) {
-    res.status(500)
-    res.render('error', { error: err })
-  })
-  
-// app.use(express.urlencoded({ extended: false }));
 const airRoute = require('./routes/air');
 app.use('/air', airRoute);
 

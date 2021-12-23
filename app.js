@@ -1,7 +1,9 @@
+// Header
 const express = require('express');
 const cors = require("cors");
+const config = require('./util/config');
 const app = express();
-const port = 3123;
+const port = config.PORT;
 
 app.use(
     express.urlencoded({
@@ -19,6 +21,9 @@ app.use('/users', usersRoute);
 
 const loginRoute = require('./routes/login');
 app.use('/login', loginRoute);
+
+const datalogRoute = require('./routes/datalog/datalog');
+app.use('/datalog', datalogRoute);
 
 app.listen(port, () =>
     console.log(`Example app listening on port ${port}!`)

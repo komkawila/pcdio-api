@@ -24,6 +24,7 @@ app.use('/login', loginRoute);
 
 const datalogRoute = require('./routes/datalog/datalog');
 app.use('/datalog', datalogRoute);
+app.use('/datalog2', datalogRoute);
 
 app.listen(port, () =>
     console.log(`Example app listening on port ${port}!`)

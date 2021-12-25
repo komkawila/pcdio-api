@@ -44,11 +44,14 @@ route.post('/', async (req, res, next) => {
     const air_btu = req.body.air_btu;
     const air_type = req.body.air_type;
     const air_lifetime = req.body.air_lifetime;
+    const user_startwaranty = req.body.user_startwaranty;
+    const user_endwaranty = req.body.user_endwaranty;
+
 
     console.log("GET USER")
     await db.query("INSERT INTO user_tb (\
-        user_username, user_password, user_detail, user_localtion, user_type, user_purchaseorder, user_tel, air_brand, air_btu, air_type, air_lifetime) \
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [user_username, user_password, user_detail, user_localtion, user_type, user_purchaseorder, user_tel, air_brand, air_btu, air_type, air_lifetime], function (err, result, fields) {
+        user_username, user_password, user_detail, user_localtion, user_type, user_purchaseorder, user_tel, air_brand, air_btu, air_type, air_lifetime,user_startwaranty,user_endwaranty) \
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)", [user_username, user_password, user_detail, user_localtion, user_type, user_purchaseorder, user_tel, air_brand, air_btu, air_type, air_lifetime], function (err, result, fields) {
         if (err) {
             console.log(err);
             res.send({ err: true, message: err });

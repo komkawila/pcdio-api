@@ -27,8 +27,12 @@ app.use('/datalog', datalogRoute);
 
 const datalog2Route = require('./routes/datalog/datalog');
 app.use('/datalog2', datalog2Route);
+app.use('/datalog2', datalog2Route);
+app.use('/datalog3', datalog2Route);
+app.use('/datalog4', datalog2Route);
 app.use('/datalog5', datalog2Route);
-app.use('/datalog77', datalog2Route);
+app.use('/datalog6', datalog2Route);
+app.use('/datalog7', datalog2Route);
 
 
 app.listen(port, () =>

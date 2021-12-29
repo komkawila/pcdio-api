@@ -9,7 +9,7 @@ route.get('/', async (req, res, next) => {
             console.log(err);
             const json = { err: false, status: (result.length == 0 ? false : true), message: result };
             res.send(json);
-        } else {            
+        } else {
             const json = { err: false, status: (result.length == 0 ? false : true), message: result };
             res.send(json);
         }
@@ -25,7 +25,7 @@ route.get('/:user_username', async (req, res, next) => {
                 console.log(err);
                 const json = { err: false, status: (result.length == 0 ? false : true), message: result };
                 res.send(json);
-            } else {            
+            } else {
                 const json = { err: false, status: (result.length == 0 ? false : true), message: result };
                 res.send(json);
             }
@@ -36,13 +36,31 @@ route.get('/:user_username/:device_name', async (req, res, next) => {
     const user_username = req.params.user_username;
     const device_name = req.params.device_name;
     await db.query("SELECT * FROM device_tb WHERE user_username = ? AND device_name = ?",
-        [user_username,device_name],
+        [user_username, device_name],
         function (err, result, fields) {
             if (err) {
                 console.log(err);
                 const json = { err: false, status: (result.length == 0 ? false : true), message: result };
                 res.send(json);
-            } else {            
+            } else {
+                const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+                res.send(json);
+            }
+        });
+});
+
+route.get('/update-status/:user_username/:device_name/:device_status', async (req, res, next) => {
+    const user_username = req.params.user_username;
+    const device_name = req.params.device_name;
+    const device_status = req.params.device_status;
+    await db.query("UPDATE device_tb SET device_status = ? WHERE user_username = ? AND device_name = ?",
+        [device_status, user_username, device_name],
+        function (err, result, fields) {
+            if (err) {
+                console.log(err);
+                const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+                res.send(json);
+            } else {
                 const json = { err: false, status: (result.length == 0 ? false : true), message: result };
                 res.send(json);
             }

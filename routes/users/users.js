@@ -4,13 +4,13 @@ const route = express.Router();
 
 // Get USER Type All
 route.get('/', async (req, res, next) => {
-    console.log("GET USER")
     await db.query("SELECT * FROM user_tb", function (err, result, fields) {
         if (err) {
             console.log(err);
-            res.send({ err: true, message: err });
-        } else {
-            const json = { err: false, message: result };
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
+        } else {            
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
             res.send(json);
         }
     });

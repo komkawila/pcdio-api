@@ -1,1 +1,14 @@
 # pcdservicetft-api
+
+[/users]
+    - [GET] / ดูข้อมูล USER
+    [/id]
+        - [GET] /:id ดูข้อมูลเฉพาะ USER ID
+    [/auth]
+        - [GET] /:username/:password ดูข้อมูล USERNAME PASSWORD
+
+[/espdevice]
+    - [GET] /status ดูข้อมูลอุปกรณ์ทุกๆ USER
+    - [GET] /status/:user ดูข้อมูลอุปกรณ์เฉพาะ USER ทุกๆ device
+    - [GET] /status/:user/:device_name ดูข้อมูลอุปกรณ์เฉพาะ USER และ device_name นั้นๆ
+    - [GET] /status/update-status/:user/:device_name/:status อัพเดทสถานะอุปกรณ์เฉพาะ USER และ device_name นั้นๆ

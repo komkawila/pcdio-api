@@ -19,11 +19,12 @@ app.use('/users', usersRoute);
 const espdeviceRoute = require('./routes/espdevice/espdevice');
 app.use('/espdevice', espdeviceRoute);
 
-// const loginRoute = require('./routes/login');
-// app.use('/login', loginRoute);
+const loginRoute = require('./routes/login');
+app.use('/login', loginRoute);
 
-// const datalogRoute = require('./routes/datalog/datalog');
-// app.use('/datalog', datalogRoute);
+const deviceRoute = require('./routes/device/device');
+app.use('/device', deviceRoute);
+
 
 app.listen(port, () =>
     console.log(`Example app listening on port ${port}!`)

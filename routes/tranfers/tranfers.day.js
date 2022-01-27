@@ -17,6 +17,21 @@ route.get('/checkid/:user_username/:expire_price', async (req, res, next) => {
     });
 });
 
+route.patch('/setexpire/:device_id', async (req, res, next) => {
+    const device_id = req.params.device_id;
+    const expire_price = req.body.expire_price;
+    await db.query("UPDATE device_tb SET expire_price = ? WHERE device_id = ?",[expire_price,device_id],function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
+        } else {
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
+        }
+    });
+});
+
 route.patch('/updateexpire/:device_id', async (req, res, next) => {
     const device_id = req.params.device_id;
     const expire = req.body.expire;

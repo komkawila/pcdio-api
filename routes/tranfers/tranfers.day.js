@@ -8,9 +8,11 @@ route.get('/checkid/:user_username/:expire_price', async (req, res, next) => {
     await db.query("SELECT * FROM device_tb WHERE user_username = ? and expire_price = ? limit 1",[user_username,expire_price],function (err, result, fields) {
         if (err) {
             console.log(err);
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         } else {
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         }
     });
 });
@@ -21,9 +23,11 @@ route.patch('/updateexpire/:device_id', async (req, res, next) => {
     await db.query("UPDATE device_tb SET expire = ? WHERE device_id = ?",[expire,device_id],function (err, result, fields) {
         if (err) {
             console.log(err);
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         } else {
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         }
     });
 });
@@ -33,9 +37,11 @@ route.get('/pluseexpire/:device_id', async (req, res, next) => { // เพิ่
     await db.query("UPDATE device_tb SET expire = device_tb.expire + 30 WHERE device_id = ?",[device_id],function (err, result, fields) {
         if (err) {
             console.log(err);
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         } else {
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         }
     });
 });
@@ -45,9 +51,11 @@ route.get('/minusexpire/:device_id', async (req, res, next) => { // ลบ -1
     await db.query("UPDATE device_tb SET expire = device_tb.expire - 1 WHERE device_id = ?",[device_id],function (err, result, fields) {
         if (err) {
             console.log(err);
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         } else {
-            res.send(result);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
         }
     });
 });

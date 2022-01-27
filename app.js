@@ -25,6 +25,9 @@ app.use('/login', loginRoute);
 const deviceRoute = require('./routes/device/device');
 app.use('/device', deviceRoute);
 
+const tranfersRoute = require('./routes/tranfers/tranfers');
+app.use('/tranfers', tranfersRoute);
+
 
 app.listen(port, () =>
     console.log(`Example app listening on port ${port}!`)

@@ -76,3 +76,7 @@ route.get('/minusexpire/:device_id', async (req, res, next) => { // ลบ -1
 });
 
 module.exports = route;
+
+
+
+

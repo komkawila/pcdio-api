@@ -94,6 +94,22 @@ route.get('/countdown/:device_id', async (req, res, next) => {
         });
 });
 
+// route.get('/setcount/:device_id/:count', async (req, res, next) => {
+//     console.log('device_id')
+//     const device_id = req.params.device_id;
+//     const count = req.params.count;
+//     await db.query("UPDATE device_tb SET count= count - ? WHERE device_id = ?;UPDATE device_tb SET count_last = ? WHERE device_id = ?;",
+//         [count, device_id, count, device_id],
+//         function (err, result, fields) {
+//             if (err) {
+//                 console.log(err);
+//                 res.send(result);
+//             } else {
+//                 res.send(result);
+//             }
+//         });
+// });
+
 route.get('/setcount/:device_id/:count', async (req, res, next) => {
     console.log('device_id')
     const device_id = req.params.device_id;
@@ -105,13 +121,24 @@ route.get('/setcount/:device_id/:count', async (req, res, next) => {
                 console.log(err);
                 res.send(result);
             } else {
-                res.send(result);
+                // res.send(result);
+                db.query("UPDATE device_tb SET count_last = ? WHERE device_id = ?",
+                    [count, device_id],
+                    function (err2, result2, fields2) {
+                        if (err2) {
+                            console.log(err2);
+                            res.send(result2);
+                        } else {
+                            res.send(result2);
+                        }
+                    });
             }
         });
 });
 
+
 route.get('/setread/:device_id/:readstatus', async (req, res, next) => {
-    console.log('device_id')
+    console.log('device_id');
     const device_id = req.params.device_id;
     const readstatus = req.params.readstatus;
     await db.query("UPDATE device_tb SET readstatus= ? WHERE device_id = ?",

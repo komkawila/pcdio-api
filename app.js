@@ -28,6 +28,9 @@ app.use('/device', deviceRoute);
 const tranfersRoute = require('./routes/tranfers/tranfers');
 app.use('/tranfers', tranfersRoute);
 
+const appsRoute = require('./routes/apps/apps');
+app.use('/apps', appsRoute);
+
 
 app.listen(port, () =>
     console.log(`Example app listening on port ${port}!`)

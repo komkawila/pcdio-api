@@ -100,11 +100,27 @@ route.patch('/countlast2/:device_id', async (req, res, next) => {
         });
 });
 
-// SETSENSOR ตั้งค่าเปิดรีเลย์ตามจำนวนเซนเซอร์
+// SETSENSOR 1 ตั้งค่าเปิดรีเลย์ตามจำนวนเซนเซอร์
 route.patch('/setsensor/:device_id', async (req, res, next) => {
     const device_id = req.params.device_id;
     const value = req.body.value;
     await db.query("UPDATE device_tb SET setsensor= ? WHERE device_id = ?",
+        [value, device_id],
+        function (err, result, fields) {
+            if (err) {
+                console.log(err);
+                res.send({ err: true, status: false, message: err });
+            } else {
+                const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+                res.send(json);
+            }
+        });
+});
+// SETSENSOR 2 ตั้งค่าเปิดรีเลย์ตามจำนวนเซนเซอร์
+route.patch('/setsensor2/:device_id', async (req, res, next) => {
+    const device_id = req.params.device_id;
+    const value = req.body.value;
+    await db.query("UPDATE device_tb SET setsensor2= ? WHERE device_id = ?",
         [value, device_id],
         function (err, result, fields) {
             if (err) {

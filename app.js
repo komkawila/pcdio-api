@@ -16,9 +16,6 @@ app.use(express.json());
 const usersRoute = require('./routes/users/users');
 app.use('/users', usersRoute);
 
-const usersRoute2 = require('./routes/users/users');
-app.use('/users5', usersRoute2);
-
 const espdeviceRoute = require('./routes/espdevice/espdevice');
 app.use('/espdevice', espdeviceRoute);
 

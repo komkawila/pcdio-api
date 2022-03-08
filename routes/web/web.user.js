@@ -20,7 +20,7 @@ route.get('/', async (req, res, next) => {
 route.post('/', async (req, res, next) => {
     const user_username = req.body.user_username;
     const user_password = req.body.user_password;
-    await db.query("INSERT INTO user_tb (user_username, user_password) VALUES (?,?))",
+    await db.query("INSERT INTO user_tb (user_username, user_password) VALUES (?,?)",
         [user_username, user_password],
         function (err, result, fields) {
             if (err) {

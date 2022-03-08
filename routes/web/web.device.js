@@ -50,7 +50,7 @@ route.get('/:user_username', async (req, res, next) => {
 route.post('/', async (req, res, next) => {
     const device_name = req.body.device_name;
     const user_username = req.body.user_username;
-    await db.query("INSERT INTO device_tb (device_name, user_username) VALUES (?,?))",
+    await db.query("INSERT INTO device_tb (device_name, user_username) VALUES (?,?)",
         [device_name, user_username],
         function (err, result, fields) {
             if (err) {
@@ -88,7 +88,6 @@ route.put('/:device_id', async (req, res, next) => {
     const settime_relayC = req.body.settime_relayC;
     const setbath = req.body.setbath;
     const setbath2 = req.body.setbath2;
-
 
     await db.query("UPDATE device_tb SET device_name=?,device_status=?,device_onoff=?,device_bath=?,user_username=?,device_relay=?,pulse=?,state_pulse=?,count_set=?,\
     count=?,count_last=?,count2_set=?,count2=?,count2_last=?,setsensor=?,setsensor2=?,readstatus=?,expire=?,expire_price=,settime_relayC=?,setbath=?,setbath2=? WHERE device_id=?",

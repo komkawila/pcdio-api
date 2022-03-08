@@ -7,7 +7,7 @@ route.post('/', async (req, res, next) => {
     const user_username = req.body.user_username;
     const user_password = req.body.user_password;
     console.log("Login " + user_username + "  |  " + user_password);
-    await db.query("SELECT * FROM user_tb WHERE user_username = ? and user_password = ?",
+    await db.query("SELECT * FROM user_tb WHERE user_username = ? and user_password = ? and user_permission = 1",
         [user_username, user_password], function (err, result, fields) {
             if (err) {
                 console.log(err);

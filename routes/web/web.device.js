@@ -16,6 +16,21 @@ route.get('/', async (req, res, next) => {
         });
 });
 
+// GET ID Devices
+route.patch('/:device_id', async (req, res, next) => {
+    const device_id = req.params.device_id;
+    await db.query("SELECT * FROM device_tb WHERE device_id = ?",
+        [device_id], function (err, result, fields) {
+            if (err) {
+                console.log(err);
+                res.send({ err: true, status: false, message: err });
+            } else {
+                const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+                res.send(json);
+            }
+        });
+});
+
 // GET Devices
 route.get('/:user_username', async (req, res, next) => {
     const user_username = req.params.user_username;

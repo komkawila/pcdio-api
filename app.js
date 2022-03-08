@@ -32,7 +32,7 @@ const appsRoute = require('./routes/apps/apps');
 app.use('/apps', appsRoute);
 
 const webRoute = require('./routes/web/web');
-app.use('/web', appsRoute);
+app.use('/web', webRoute);
 
 
 app.listen(port, () =>

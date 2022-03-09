@@ -5,7 +5,7 @@ const route = express.Router();
 
 // 
 route.patch('/devicename/:device_id', async (req, res, next) => {
-    const device_id = req.body.device_id;
+    const device_id = req.params.device_id;
     const values = req.body.values;
     await db.query("UPDATE device_tb SET device_name=? WHERE device_id=?",
         [values, device_id],

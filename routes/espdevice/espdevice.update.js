@@ -179,4 +179,20 @@ route.get('/setread/:device_id/:readstatus', async (req, res, next) => {
         });
 });
 
+
+route.get('/relaynewapp/:device_id/:relaynewapp', async (req, res, next) => {
+    const device_id = req.params.device_id;
+    const relaynewapp = req.params.relaynewapp;
+    await db.query("UPDATE device_tb SET relaynewapp = ? WHERE device_id = ?",
+        [relaynewapp, device_id],
+        function (err, result, fields) {
+            if (err) {
+                console.log(err);
+                res.send(result);
+            } else {
+                res.send(result);
+            }
+        });
+});
+
 module.exports = route;

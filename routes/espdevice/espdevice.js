@@ -10,6 +10,9 @@ route.use('/update', updateRoute);
 const logRoute = require('./espdevice.log');
 route.use('/log', logRoute);
 
+const lineRoute = require('./espdevice.line');
+route.use('/line', lineRoute);
+
 // const brandRoute = require('./air.brand');
 // route.use('/brands', brandRoute);
 

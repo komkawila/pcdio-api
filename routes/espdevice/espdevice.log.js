@@ -14,7 +14,7 @@ route.get('/addlog/:device_id/:user_username/:headers/:value', async (req, res, 
                 console.log(err);
                 res.send(result);
             } else {
-                res.send(result[0] == null ? '{}' : result[0]);
+                res.send(result);
             }
         });
 });

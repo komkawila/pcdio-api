@@ -1,7 +1,7 @@
 const express = require('express');
 const db = require('../../util/db.config');
 const route = express.Router();
-device_id, user_username, headers, value
+
 route.get('/addlog/:device_id/:user_username/:headers/:value', async (req, res, next) => {
     console.log('32')
     const device_id = req.params.device_id;

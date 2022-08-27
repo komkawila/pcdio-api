@@ -7,6 +7,9 @@ route.use('/status', statusRoute);
 const updateRoute = require('./espdevice.update');
 route.use('/update', updateRoute);
 
+const logRoute = require('./espdevice.log');
+route.use('/log', logRoute);
+
 // const brandRoute = require('./air.brand');
 // route.use('/brands', brandRoute);
 

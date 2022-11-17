@@ -31,6 +31,23 @@ route.get('/id/:user_id', async (req, res, next) => {
         });
 });
 
+
+route.patch('/:user_id', async (req, res, next) => {
+    const user_id = req.params.user_id;
+    const user_password = req.body.user_password;
+    await db.query("UPDATE user_tb SET user_password=? WHERE user_id=?",
+        [user_password, user_id],
+        function (err, result, fields) {
+            if (err) {
+                console.log(err);
+                const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+                res.send(json);
+            } else {
+                const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+                res.send(json);
+            }
+        });
+});
 route.get('/auth/:user_username/:user_password', async (req, res, next) => {
     const user_username = req.params.user_username;
     const user_password = req.params.user_password;

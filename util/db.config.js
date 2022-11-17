@@ -1,8 +1,8 @@
 const mysql = require("mysql");
 const db = mysql.createConnection({
-    host: "dns.komkawila.com",
-    user: "komkawila",
-    password: "Kkomprwm20_1",
+    host: "dns.pcdservice.info",
+    user: "admin",
+    password: "gP7Trtg9JukdQwsT",
     database: "pcdserviceio_db",
 });
 

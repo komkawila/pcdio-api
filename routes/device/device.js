@@ -15,6 +15,19 @@ route.get('/', async (req, res, next) => {
     });
 });
 
+route.get('/:user_username', async (req, res, next) => {
+    const user_username = req.params.user_username;
+    await db.query("SELECT * FROM device_tb where user_username = ?", [user_username], function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
+        } else {
+            const json = { err: false, status: (result.length == 0 ? false : true), message: result };
+            res.send(json);
+        }
+    });
+});
 route.get('/uname/:user_username', async (req, res, next) => {
     const user_username = req.params.user_username;
     await db.query("SELECT * FROM device_tb where user_username = ?", [user_username], function (err, result, fields) {

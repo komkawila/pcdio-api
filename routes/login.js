@@ -3,7 +3,7 @@ const db = require('../util/db.config');
 const route = express.Router();
 
 // Login
-route.post('/user', async (req, res, next) => {
+route.post('/', async (req, res, next) => {
     const user_username = req.body.user_username;
     const user_password = req.body.user_password;
     console.log("Login " + user_username + "  |  " + user_password);

@@ -24,6 +24,44 @@ route.get(
   }
 );
 
+route.get(
+  "/addlogcoin/:device_id/:user_username/:amount",
+  async (req, res, next) => {
+    const device_id = req.params.device_id;
+    const user_username = req.params.user_username;
+    const amount = req.params.amount;
+    await db.query(`INSERT INTO coinlog_tb(deviceid, user_username, amount) VALUES (${device_id}, '${user_username}', '${amount}')`, function (err2, result2, fields2) {
+      if (err2) {
+        console.log(err2);
+        const json = { err: false, status: (result2.length == 0 ? false : true), message: result2 };
+        res.send(json);
+      } else {
+        const json = { err: false, status: (result2.affectedRows !== 0 ? true : false), message: "Success" };
+        res.send(json);
+      }
+    });
+  }
+);
+
+route.get(
+  "/addlogbanknote/:device_id/:user_username/:amount",
+  async (req, res, next) => {
+    const device_id = req.params.device_id;
+    const user_username = req.params.user_username;
+    const amount = req.params.amount;
+    await db.query(`INSERT INTO banknotelog_tb(deviceid, user_username, amount) VALUES (${device_id}, '${user_username}', '${amount}')`, function (err2, result2, fields2) {
+      if (err2) {
+        console.log(err2);
+        const json = { err: false, status: (result2.length == 0 ? false : true), message: result2 };
+        res.send(json);
+      } else {
+        const json = { err: false, status: (result2.affectedRows !== 0 ? true : false), message: "Success" };
+        res.send(json);
+      }
+    });
+  }
+);
+
 route.get("/sendline/:linetoken/:message", async (req, res, next) => {
   const linetoken = req.params.linetoken;
   const message = req.params.message;

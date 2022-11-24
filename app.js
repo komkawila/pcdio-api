@@ -34,7 +34,9 @@ app.use('/apps', appsRoute);
 const webRoute = require('./routes/web/web');
 app.use('/web', webRoute);
 
+const logRoute = require('./routes/log/log');
+app.use('/log', logRoute);
 
 app.listen(port, () =>
-    console.log(`Example app listening on port ${port}!`)
+    console.log(`PCDIO-API listening on port ${port}!`)
 );

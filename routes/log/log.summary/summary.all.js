@@ -386,4 +386,244 @@ route.get('/month/banknote', async (req, res, next) => {
         }
     });
 });
+
+route.get('/allsummarymonth', async (req, res, next) => {
+    var query1 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as online_amount FROM onlinelog_tb GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+    var query2 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as banknote_amount FROM banknotelog_tb GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+    var query3 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as coin_amount FROM coinlog_tb GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+
+    var online_amount = 0;
+    var banknote_amount = 0;
+    await db.query(query1, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            online_amount = result
+        }
+    });
+    await db.query(query2, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            banknote_amount = result
+        }
+    });
+    await db.query(query3, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            const json = {
+                err: false, status: true, message: {
+                    online: online_amount,
+                    banknote: banknote_amount,
+                    coin: result
+                }
+            };
+            res.send(json);
+        }
+    });
+});
+
+
+
+route.get('/allsummarymonth/user', async (req, res, next) => {
+    if (
+        typeof req.query.uname === "undefined"
+    ) {
+        const json = {
+            err: true, status: false, message: "Require param {uname}"
+        };
+        res.send(json);
+        return;
+    }
+    var query1 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as online_amount FROM onlinelog_tb WHERE user_username='${req.query.uname}' GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+    var query2 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as banknote_amount FROM banknotelog_tb WHERE user_username='${req.query.uname}' GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+    var query3 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as coin_amount FROM coinlog_tb WHERE user_username='${req.query.uname}' GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+
+    var online_amount = 0;
+    var banknote_amount = 0;
+    await db.query(query1, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            online_amount = result
+        }
+    });
+    await db.query(query2, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            banknote_amount = result
+        }
+    });
+    await db.query(query3, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            const json = {
+                err: false, status: true, message: {
+                    online: online_amount,
+                    banknote: banknote_amount,
+                    coin: result
+                }
+            };
+            res.send(json);
+        }
+    });
+});
+
+
+route.get('/allsummarymonth/device', async (req, res, next) => {
+    if (
+        typeof req.query.did === "undefined"
+    ) {
+        const json = {
+            err: true, status: false, message: "Require param {did}"
+        };
+        res.send(json);
+        return;
+    }
+    var query1 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as online_amount FROM onlinelog_tb WHERE deviceid='${req.query.did}' GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+    var query2 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as banknote_amount FROM banknotelog_tb WHERE deviceid='${req.query.did}' GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+    var query3 = `SELECT date_format(createAt, '%Y-%m') as datemonth, SUM(amount) as coin_amount FROM coinlog_tb WHERE deviceid='${req.query.did}' GROUP BY date_format(createAt, '%Y-%m') ORDER BY createAt ASC`;
+
+    var online_amount = 0;
+    var banknote_amount = 0;
+    await db.query(query1, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            online_amount = result
+        }
+    });
+    await db.query(query2, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            banknote_amount = result
+        }
+    });
+    await db.query(query3, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            const json = {
+                err: false, status: true, message: {
+                    online: online_amount,
+                    banknote: banknote_amount,
+                    coin: result
+                }
+            };
+            res.send(json);
+        }
+    });
+});
+
+
+route.get('/allsummaryday/user', async (req, res, next) => {
+    if (
+        typeof req.query.uname === "undefined"
+    ) {
+        const json = {
+            err: true, status: false, message: "Require param {uname}"
+        };
+        res.send(json);
+        return;
+    }
+    var query1 = `SELECT date_format(createAt, '%Y-%m-%d') as datemonth, SUM(amount) as online_amount FROM onlinelog_tb WHERE user_username='${req.query.uname}' GROUP BY date_format(createAt, '%Y-%m-%d') ORDER BY createAt ASC`;
+    var query2 = `SELECT date_format(createAt, '%Y-%m-%d') as datemonth, SUM(amount) as banknote_amount FROM banknotelog_tb WHERE user_username='${req.query.uname}' GROUP BY date_format(createAt, '%Y-%m-%d') ORDER BY createAt ASC`;
+    var query3 = `SELECT date_format(createAt, '%Y-%m-%d') as datemonth, SUM(amount) as coin_amount FROM coinlog_tb WHERE user_username='${req.query.uname}' GROUP BY date_format(createAt, '%Y-%m-%d') ORDER BY createAt ASC`;
+
+    var online_amount = 0;
+    var banknote_amount = 0;
+    await db.query(query1, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            online_amount = result
+        }
+    });
+    await db.query(query2, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            banknote_amount = result
+        }
+    });
+    await db.query(query3, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            const json = {
+                err: false, status: true, message: {
+                    online: online_amount,
+                    banknote: banknote_amount,
+                    coin: result
+                }
+            };
+            res.send(json);
+        }
+    });
+});
+
+route.get('/allsummaryday/device', async (req, res, next) => {
+    if (
+        typeof req.query.did === "undefined"
+    ) {
+        const json = {
+            err: true, status: false, message: "Require param {did}"
+        };
+        res.send(json);
+        return;
+    }
+    var query1 = `SELECT date_format(createAt, '%Y-%m-%d') as datemonth, SUM(amount) as online_amount FROM onlinelog_tb WHERE deviceid='${req.query.did}' GROUP BY date_format(createAt, '%Y-%m-%d') ORDER BY createAt ASC`;
+    var query2 = `SELECT date_format(createAt, '%Y-%m-%d') as datemonth, SUM(amount) as banknote_amount FROM banknotelog_tb WHERE deviceid='${req.query.did}' GROUP BY date_format(createAt, '%Y-%m-%d') ORDER BY createAt ASC`;
+    var query3 = `SELECT date_format(createAt, '%Y-%m-%d') as datemonth, SUM(amount) as coin_amount FROM coinlog_tb WHERE deviceid='${req.query.did}' GROUP BY date_format(createAt, '%Y-%m-%d') ORDER BY createAt ASC`;
+
+    var online_amount = 0;
+    var banknote_amount = 0;
+    await db.query(query1, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            online_amount = result
+        }
+    });
+    await db.query(query2, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            banknote_amount = result
+        }
+    });
+    await db.query(query3, function (err, result, fields) {
+        if (err) {
+            console.log(err);
+            res.send({ err: true, status: false, message: err });
+        } else {
+            const json = {
+                err: false, status: true, message: {
+                    online: online_amount,
+                    banknote: banknote_amount,
+                    coin: result
+                }
+            };
+            res.send(json);
+        }
+    });
+});
 module.exports = route;
